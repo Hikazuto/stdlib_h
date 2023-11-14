@@ -1,0 +1,103 @@
+# HIERARCHY OF THE FUNCTIONS
+- [A] USER
+- [B] IMPLEMENTATION
+- [C] SYSTEM
+- [D] CORE
+    > [D-0] Assembly / Binary Implementations
+    > [D-1] Standard Functions (STD_AVAILABLE)
+    > [D-2] Original Functions
+    > [D-3] Aid from [0] or [D-0] [D-1] 
+
+- [0] STANDARD FUNCTIONS
+
+## CORE_H
+Independent to any functions (sometimes re-implementing standard functions)
+Core (lowest level)
+
+- MEMORY MANAGEMENT
+    [D-1] bool memcmp_h()   {memcmp()}
+    [D-2] bool memcmp_t()
+
+    [D-1] ptr memseek() {memchr()}
+            BYTE ptr memseek_b()
+            WORD ptr memseek_w()
+            DWORD ptr memseek_dw()
+            QWORD ptr memseek_qw()
+
+    [D-1] ptr memcpy_h()    {memcpy()}
+    [D-2] ptr memcpy_t()
+    [D-1] int memcpy_hs()   {memmove()}
+    [D-2] int memcpy_ts()
+
+    [D-1] memccpy_h()   {memccpy()}
+    [D-1] mempcpy_h()   {mempcpy()}
+
+    [D-2] memmove_h()
+    [D-2] memmove_s()
+
+    [D-1] memreset()    {memset( 0 )}
+
+
+- STRING MANAGEMENT
+    [D-1] int strlen_h()
+
+    CHARACTER SEEK {cfind()}
+    [D-1] int chseek() {strspn()}
+    [D-1] ptr chseek_p {strchr()}
+    [D-2] int chseek_s()
+    [D-1] int chrseek() {strrspn()}
+    [D-1] ptr chrseek_p {strrchr()}
+    [D-2] int chrseek_s()
+
+    MULTI-CHARACTER SEEK
+
+
+    CASE SENSITIVE COMPARE
+    [D-1] bool strcmp_h()
+            exbool strcmp_ha()
+            int strcmp_l()
+            ptr strcmp_p()
+
+    CASE INSENSITIVE COMPARE
+    [D-1] bool strcasecmp_h()
+            exbool strcasecmp_ha()
+            int strcasecmp_l()
+            ptr strcasecmp_p()
+
+    STRING CONCAT
+    [D-1] int strcat_h()
+    [D-1] int strcat_hs()
+    [D-1] int strncat_h()
+    [D-1] int strncat_hs()
+
+    STRING COPY
+    [D-1] int strcpy_h()
+    [D-1] int strcpy_hs()
+    [D-1] int strncpy_h()
+    [D-1] int strncpy_hs()
+
+    STRING MOVE
+    [D-2] int strmov()
+    [D-2] int strmov_s()
+    [D-2] int strnmov()
+    [D-2] int strnmov_s()
+
+    STRING DUPLICATE
+    [D-1] ptr strdup_h()
+    [D-1] ptr strndup_h()
+
+    STRING REVERSE
+    [D-1] int strrev_h() {strrev()}
+    [D-2] int strcrev()
+    [D-2] int strnrev()
+
+    STRING CASE
+    [D-1] int strlwr_h() {strlwr()}
+    [D-1] int strhir_h()
+    [D-2] int strnlwr()
+    [D-2] int strnhir()
+
+
+
+
+
