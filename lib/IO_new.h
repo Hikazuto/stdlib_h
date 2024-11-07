@@ -83,7 +83,7 @@ STD_AVAILABLE DEFCON_BETA int strArrayCat(register char main[], register char se
  * 1       - returns the offset (null terminator from main base ptr)
  * 2 (EXP) - returns the pointer to null terminator of mainstr
  */
-DEFCON_ALPHA STD_AVAILABLE size_t strcat_h(register char *mainStr, register char *secStr, register int mainOffset, uint8_t parameter) {
+DEFCON_ALPHA STD_AVAILABLE size_t strcat1_h(register char *mainStr, register char *secStr, register int mainOffset, uint8_t parameter) {
     
     // check the length
     if (mainOffset == -1) mainOffset = strlen_h(mainStr);

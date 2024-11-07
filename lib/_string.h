@@ -111,7 +111,7 @@ DEFCON_BETA int strmov_s(register char* from, register char* to, register unsign
 
 STD_AVAILABLE int strcpy_h(register const unsigned char *from, register unsigned char *to) {
     register unsigned char c;
-    byte* init = from;
+    const byte* init = from;
     for ( ; TRUE ; ) {
         *to = c = *from;
         if (c == STRING_TERMINATOR) break;

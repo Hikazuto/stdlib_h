@@ -120,8 +120,8 @@ TEMP typedef struct dynamicChunk {
         fptr->_tmpfname);
 
 #define FILE_PROPERTIES2(fptr) NON_STD OPAQUE_TYPE\
-        printf("fptr:\t%llx\nbase:\t%llx\nbufsiz:\t%d\ncharbuf:\t%d\ncnt:\t%d\nfile:\t%d\nflag:\t%d\nptr:\t%llx\ntmpfname:\t%llx\n\n",\
-        fptr,           \
+        printf("fptr:\t%llx  {%s}\nbase:\t%llx\nbufsiz:\t%d\ncharbuf:\t%d\ncnt:\t%d\nfile:\t%d\nflag:\t%d\nptr:\t%llx\ntmpfname:\t%llx\n\n",\
+        fptr, "~/" #fptr,          \
         fptr->_base,    \
         fptr->_bufsiz,  \
         fptr->_charbuf, \

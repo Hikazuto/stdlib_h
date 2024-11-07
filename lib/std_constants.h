@@ -62,7 +62,7 @@ const char* __clrline__ = "\r\33[K";
 #define NULL_INIT   { NUL }
 
 #define bitsize(type) (sizeof(type) * 8)
-#define ABSOLUTE(value) ((value < 0) ? -value : value)
+#define ABS(value) ((value < 0) ? -value : value)
 
 // Standard Integer Bit Assignments
 #ifndef BIT_CONST_VALUE

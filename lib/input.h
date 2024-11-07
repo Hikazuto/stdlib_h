@@ -4,13 +4,14 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdint.h>
-#include "Bit_manipulation.h"
+#include "datatype.h"
+#include "bit_man.h"
 #include "std_constants.h"
 #include "mem_man.h"
 #include "src_info.h"
 #include "_string.h"
 
-#include "decl/input.h"
+// #include "decl/input.h"
 
 #define STD_BUFSIZE 0xfff   /* Standard Buffer Size */
 
@@ -24,6 +25,7 @@ unsigned char extInput_table(unsigned char *c);
 
 #define STD_STRING(variable, string) (variable) ? 0 : (variable = string)
 
+typedef uint8_t stat8_t;
 typedef union INPUT_STATUS {
     stat8_t UNION;
     struct {
@@ -214,6 +216,22 @@ TEMP
 
 #define CH_WITHNULLSTR TEMPSOL  0x8000  /* with STRING TERMINATOR (make sure to reserve 1 more byte for string terminator) */
 
+
+/* ======= Fundamental Functions ======= */
+
+STD_AVAILABLE int strlen_h(register const unsigned char *str);
+STD_AVAILABLE int strcmp_h(register const unsigned char *str, register const unsigned char *str2);
+
+int cfind(reg const char* str, reg const char c);
+int cfind_s(reg const char* str, reg unsigned int len, reg const char c);
+
+int getline(reg unsigned char* str);
+DEFCON_ALPHA int getline_s(reg unsigned char* str, unsigned int size);
+
+TEMP int getch_line(reg char* str, reg uint16_t mode, const char extraInput[], const char output);
+TEMP int getch_line_s(char* str, uint16_t size, register uint16_t mode, const char extraInput[], const char output);
+
+
 // getline but with getch
 TEMP int getch_line(register char* str, register uint16_t mode, const char extraInput[], const char output) {
     register char c;
@@ -309,7 +327,7 @@ TEMP int getch_line_s(char* str, uint16_t size, register uint16_t mode, const ch
 
         /* main check */ {
         if (c == INVALID_INPUT) ; /* Skip the entire checking */
-        else if (mode == KB_DEFAULT) ;  
+        else if (BITCHK_U(mode, KB_DEFAULT)) ;  
         else if (BITCHK(mode, KB_LOWCASE) && ISLCHAR(c)) ;
         else if (BITCHK(mode, KB_UPCASE)  && ISUCHAR(c)) ;
         else if (BITCHK(mode, KB_NUM)     && ISNUM(c)) ;
@@ -317,7 +335,7 @@ TEMP int getch_line_s(char* str, uint16_t size, register uint16_t mode, const ch
         else if (BITCHK(mode, KB_EXTRA)   && (cfind(extraInput, c) != -1) ) ;
         else c = INVALID_INPUT;
         }
-
+    
         // assign and print
         if (c != INVALID_INPUT) {
             *buffer = c; buffer++; size--;
@@ -368,24 +386,24 @@ uint8_t check_input_status(register unsigned char c, uint8_t default_status) {
     register uint8_t status = default_status;
 
     // control characters
-    if (c < 27) BIT_SWITCH_1(status, INPUT_STATUS_CONTROL);
+    if (c < 27) BIT_SW1(status, INPUT_STATUS_CONTROL);
 
     // Special Characters
     switch (c)
     {
     case '\n': case  KB_RETURN:    /* Newline characters, 13 is carriage return "ENTER" key */
-        BIT_SWITCH_1(status, INPUT_STATUS_NEWLINE);
+        BIT_SW1(status, INPUT_STATUS_NEWLINE);
     case '\t': case ' ':   /* Blank characters (including newline characters) */
-        BIT_SWITCH_1(status, INPUT_STATUS_BLANK); break;
+        BIT_SW1(status, INPUT_STATUS_BLANK); break;
 
     case '\b': /* backspace character */
-        BIT_SWITCH_1(status, INPUT_STATUS_BACKSPACE); break;
+        BIT_SW1(status, INPUT_STATUS_BACKSPACE); break;
 
     case EOF_HEX: case KB_EOF:    /* FORCE EXIT, 26 is unbuffered version of EOF (ctrl - Z) */
-        BIT_SWITCH_1(status, INPUT_STATUS_EXIT); break;
+        BIT_SW1(status, INPUT_STATUS_EXIT); break;
 
     case WIN_KB_EXTENDFLAG1: case WIN_KB_EXTENDFLAG2:    /* EXTENDED CHARACTERS 0x00 and -32 is windows flag for extended keyboard input */
-        BIT_SWITCH_1(status, INPUT_STATUS_EXTENDED); break;
+        BIT_SW1(status, INPUT_STATUS_EXTENDED); break;
 
     default: break;
     }

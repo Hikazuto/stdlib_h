@@ -30,7 +30,7 @@ int main()
     //     printf("%2d| %d  %d\n", i, mem[i], mem2[i]);
     // }
     printf("memcpy:  %s\n", &str[0]);
-    printf("memmove: %s\n", &str[0]);
+    printf("memmove: %s\n", &str2[0]);
     printf("memcpy_H:  %s\n", &str3[0]);
     return strlen(str);
 }

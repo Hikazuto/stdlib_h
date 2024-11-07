@@ -5,12 +5,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <windows.h>
+#include <assert.h>
 
+#include "lib/_file.h"
+#include "lib/file_io.h"
+#include <conio.h>
 
+#define ASS(val) printf("%s", "##val");
 int main() {
-    char* str;
-    char* str2;
-    strcasecmp(str, str2);
-    strset(str, 2);
+    
     
 }

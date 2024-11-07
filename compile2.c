@@ -242,8 +242,8 @@ int compile(int argc, char* argv[], char* filename, char* output_dir){
     if(cmdbool[ASM_FILE] == TRUE) systemf("gcc %s -O%d -S -masm=intel %s.c -o %s_O%d.s", exParams, optimize, filename, outputfile, optimize);
     if(cmdbool[EXE_FILE] == TRUE) systemf("gcc %s -O%d %s.c -o %s_O%d", exParams, optimize, filename, outputfile, optimize);
     if(cmdbool[DEBUG] == TRUE) {
-        printf("%s\n\n%47s\n\n%s\n", __border__, "DEBUGGING", __border__);
         systemf("gcc %s -O%d %s.c -o %s_O%d", exParams, optimize, filename, outputfile, optimize);
+        printf("%s\n\n%47s\n\n%s\n", __border__, "DEBUGGING", __border__);
         systemf("%s_O%d.exe", outputfile, optimize);
 
     }

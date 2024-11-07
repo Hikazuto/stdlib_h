@@ -28,11 +28,11 @@ typedef unsigned long long uint64_t;
 
 
 // Bit Switch
-#define BIT_S0(data, operand)  (data ^ (data & operand)) /* Switch bits to 0 */
-#define BIT_S0T(data, operand) (data & (~operand))       /* Switch bits to 0 but with different method */
-#define BIT_S1(data, operand)  (data | operand)          /* Switch bits to 1 */
+#define BIT_SW0(data, operand)  (data ^ (data & operand)) /* Switch bits to 0 */
+#define BIT_SW0T(data, operand) (data & (~operand))       /* Switch bits to 0 but with different method */
+#define BIT_SW1(data, operand)  (data | operand)          /* Switch bits to 1 */
 
-#define BIT_S(data, operand)   (data ^ operand)          /* Switch bits */
+#define BIT_SW(data, operand)   (data ^ operand)          /* Switch bits */
 
 // Bit shift
 #define BIT_SR(data, offset) (data >> offset)
@@ -40,10 +40,13 @@ typedef unsigned long long uint64_t;
 
 
 // check a bit status stored in "special" status byte (same as AND '&' bitwise operator) returns either true or false
-#define BIT_CHECK(input, check) (input & check)
+#define BITCHK(input, check) (input & check)
 
 // check a specific bit position (bitpos starts from 0 at leftmost bit, returns either 1[TRUE] or 0[FALSE])
-#define BITCHK(data, bitpos) ((data >> bitpos) & 1U)
+#define BITCHK_P(data, bitpos) ((data >> bitpos) & 1U)
+
+// Check multiple bits
+#define BITCHK_U(data, check) ((~((data & check) | ~check)) == 0)
 
 /* check a specific bit position (returns either 0[FALSE] or 2^bitpos)
  * bitpos starts from 0 at leftmost bit
@@ -51,7 +54,7 @@ typedef unsigned long long uint64_t;
  * for compilers that "not clever enough" to optimize
  * if still slow, just use bitwise and (&) with constant instead (BIT_CHECK)
 */
-#define BITCHK_S(data, bitpos) (data & (1ULL << bitpos))
+#define BITCHK_PS(data, bitpos) (data & (1ULL << bitpos))
 
 #ifndef BIT_DATATYPE
 #define BIT_DATATYPE 4
