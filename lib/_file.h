@@ -8,7 +8,7 @@
 #if WIN_DEFINED
 #include <windows.h>
 #endif
-
+ 
 /* GET FILE* from file HANDLE in windows */
 /* 
  *      Open or Create File with Win32 API [HANDLE]

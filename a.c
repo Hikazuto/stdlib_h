@@ -3,8 +3,8 @@
 #include "test.h"
 #include <string.h>
 
-char buf1[0xffffff];
-char buf2[0xffffff];
+char buf1[0xfffffff];
+char buf2[0xfffffff];
 const char* initstr;
 
 int temp_1();
@@ -63,17 +63,18 @@ int funcc(register char a, register char b, register char c) {
 int main() {
     int n = 0;
     int j;
-    for (int i = 0; i < 10; i++) {
-        // j = (n < 2) ? n++ : (n = 0);
+    // for (int i = 0; i < 10; i++) {
+    //     // j = (n < 2) ? n++ : (n = 0);
 
-        if (n < 2) { j = ++n; }
-        else       { j = n = 0; }
+    //     if (n < 2) { j = ++n; }
+    //     else       { j = n = 0; }
 
-        // j = _MAXINC(n, 1);
+    //     // j = _MAXINC(n, 1);
 
 
-        printf("n:%d  j: %d\n", n, j);
-    }
+    //     printf("n:%d  j: %d\n", n, j);
+    // }
+    temp_1();
 
     // n | 0 1 
     // j | 0 1 
@@ -93,7 +94,7 @@ int temp_1() {
     rgb32_t fg32;
     rgb32_t bg32;
 
-    for (int i = 0; i < 10000; i++, fg++, bg++)
+    for (int i = 0; i < 0x2ffff; i++, fg++, bg++)
     {
         fg32.u = fg;
         bg32.u = bg;
@@ -106,7 +107,7 @@ int temp_1() {
             failcnt++;
         }
         else
-            // testlogWrite(stderr, TEST_SUCCESS, "[%d] length YES: %d : %d  POS: %d : %d", failcnt, len1, len2, __cur_termbufPos, (__curtermbuf - __termbuf2));
+            testlogWrite(stderr, TEST_SUCCESS, "[%d] length YES: %d : %d  POS: %d : %d", failcnt, len1, len2, __cur_termbufPos, (__curtermbuf - __termbuf2));
 
 
         pos1 += len1;

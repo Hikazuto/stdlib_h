@@ -4,6 +4,9 @@
         "stdio.h": "c",
         "io_new.h": "c",
         "input.h": "c",
-        "_string.h": "c"
+        "_string.h": "c",
+        "math.h": "c",
+        "_math.h": "c",
+        "limits": "c"
     }
 }

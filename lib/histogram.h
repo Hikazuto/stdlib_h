@@ -9,7 +9,7 @@
 
 // int horHistogram(const char* varName[], void* data, int nData, int barLen, int datatype);
 
-int _printBar();
+char* _printBar(char* _buf, register double value, double max_value, int bar_len, char* bar_model);
 size_t highest(void* data, int n, int sizeof_data, int (*_cmpfunc)(void*, void*));
 
 
@@ -72,7 +72,7 @@ int horHistogram(const char* varName[], void* data, int nData, size_t barLen, in
 #endif
             break;
         case TYPE_64: case TYPE_64U:
-            _barlen = normalize(*pdata.uint64++, highest.uint64) * barLen;
+            // _barlen = normalize(*pdata.uint64++, highest.uint64) * barLen;
             break;
 
         case TYPE_F:
@@ -175,6 +175,32 @@ type_t _highest_type_T(void* data, int n, int datatype){
 
     return highest;
 
+}
+
+#define BAR_DEFAULT_OPEN_CONTAINER '['
+#define BAR_DEFAULT_CLOSE_CONTAINER ']'
+#define BAR_DEFAULT_MODEL_1 '#'
+#define BAR_DEFAULT_MODEL_2 '-'
+
+char* _printBar(register char* _buf, register double value, double max_value, int bar_len, char* bar_model) {
+
+    char* retval = _buf;
+    *_buf++ = (bar_model == NULL) ? BAR_DEFAULT_OPEN_CONTAINER : bar_model[0];
+    register double delta = max_value/bar_len;
+
+
+    for (int i = 0; i < bar_len; i++) {
+        if(value >= 0) {
+            value -= delta;
+            *_buf++ = (bar_model == NULL) ? BAR_DEFAULT_MODEL_1 : bar_model[2];
+        }
+        else {
+            *_buf++ = (bar_model == NULL) ? BAR_DEFAULT_MODEL_2 : bar_model[3];
+        }
+    }
+
+    *_buf = (bar_model == NULL) ? BAR_DEFAULT_CLOSE_CONTAINER : bar_model[1];
+    return retval;
 }
 
 #endif
